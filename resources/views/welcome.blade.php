@@ -4,9 +4,9 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Bonjour - Page d'accueil
                 </div>
-           
+
 
 @endsection
 

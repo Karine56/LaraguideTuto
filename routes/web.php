@@ -33,8 +33,9 @@ Route::post('/connexion', 'ConnexionController@traitement');
 //url suivi du Nom du Controller et du nom de la methode utilisée
 Route::get('/utilisateurs', 'UtilisateursController@liste');
 
-// page de redirection après le formulaire de connexion
-Route::view('/mon-compte', 'mon-compte');
+
+Route::get('/mon-compte', 'CompteController@accueil');
+Route::get('/deconnexion', 'CompteController@deconnexion');
 
 
 

@@ -14,7 +14,6 @@ class Utilisateur extends Model implements Authenticatable {
     // aller verifier dans vendor\laravel\framework\src\Illuminate\Auth\Authenticatable.php si le getAuthPAssword() est le bon
     // si ce n'est pas le bon, la réécrire ici avec le nom de la colonne dans la BDD
 
-
     /**
      * Get the password for the user.
      *
@@ -23,6 +22,20 @@ class Utilisateur extends Model implements Authenticatable {
     public function getAuthPassword()
     {
         return $this->mot_de_passe;
+    }
+
+
+    // pour pouvoir gérer la déconnexion de l'utilisateur, sans pêter d'erreur lié au token
+    // dira à laravel : je n'ai pas de colonne RememberToken
+    
+     /**
+     * Get the column name for the "remember me" token.
+     *
+     * @return string
+     */
+    public function getRememberTokenName()
+    {
+        return '';
     }
 
 
