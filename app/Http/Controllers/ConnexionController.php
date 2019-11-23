@@ -35,6 +35,9 @@ class ConnexionController extends Controller
 
         //redirection par défaut, si les identifiants sont ok
         if ($resultat) {
+            //afficher un flash message signalant le succès de la connexion
+            flash("Vous êtes maintenant connecté")->success();
+
             return redirect('/mon-compte');
         }
 
