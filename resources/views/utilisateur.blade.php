@@ -39,4 +39,3 @@
         </p>
     @endforeach
 
-    <a href="/" class="button">Retour à l'accueil</a>

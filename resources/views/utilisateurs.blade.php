@@ -13,6 +13,5 @@
         @endforeach
     </ul>
 
-    <a href="/connexion" class="button">Se connecter</a>
 
 @endsection
