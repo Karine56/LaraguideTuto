@@ -3,7 +3,21 @@
 @section('contenu')
 
     <div class="section">
-        <h1 class='title is-1'>{{ $utilisateur->email }}</h1>
+        <h1 class='title is-1'>
+            <div class="level-left">
+                <div class="level-item">
+                {{ $utilisateur->email }}
+                </div>
+
+                @auth
+                <form class="level-item" method="post" action="/{{ $utilisateur->email }}/suivis">
+                    {{ csrf_field() }}
+                    <button type="submit" class="button">Suivre</button>
+                </form>
+                @endauth
+
+            </div>
+        </h1>
     </div>
 
     <!--  vérifier que seul l'utilisateur connecté pourra accéder au formulaire de message -->

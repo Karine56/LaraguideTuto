@@ -25,6 +25,18 @@ class Utilisateur extends Model implements Authenticatable {
         return $this->hasMany(Message::class)->latest();
     }
 
+
+    public function suivis()
+    {
+        //suivis, en 2eme parametre sera la table de pivot
+        //peut renommer les colonnes attendues par laravel : suiveur_id et suivi_id
+        // ecrase donc les valeurs par défaut pr la table de pivot
+        return $this->belongsToMany(Utilisateur::class, 'suivis', 'suiveur_id', 'suivi_id');
+    }
+
+
+
+
     /**
      * Get the password for the user.
      *
