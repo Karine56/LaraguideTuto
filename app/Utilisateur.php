@@ -34,6 +34,11 @@ class Utilisateur extends Model implements Authenticatable {
         return $this->belongsToMany(Utilisateur::class, 'suivis', 'suiveur_id', 'suivi_id');
     }
 
+    public function suit($utilisateur)
+    {
+        //retourne un booleen grâce à exists
+        return $this->suivis()->where('suivi_id', $utilisateur->id)->exists();
+    }
 
 
 

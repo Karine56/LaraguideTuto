@@ -12,7 +12,19 @@
                 @auth
                 <form class="level-item" method="post" action="/{{ $utilisateur->email }}/suivis">
                     {{ csrf_field() }}
-                    <button type="submit" class="button">Suivre</button>
+                    <!-- mais attention, modifier la route dans web.app de type delete -->
+                    @if (auth()->user()->suit($utilisateur))
+                        {{ method_field('delete') }}
+                    @endif
+
+
+                    <button type="submit" class="button">
+                        @if (auth()->user()->suit($utilisateur))
+                            Ne plus suivre
+                        @else
+                            Suivre
+                        @endif
+                    </button>
                 </form>
                 @endauth
 

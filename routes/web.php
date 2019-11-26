@@ -42,6 +42,7 @@ Route::group([
     Route::post('/modification-mot-de-passe', 'CompteController@modificationMotDePasse')->middleware('App\Http\Middleware\Auth');
     Route::post('/messages', 'MessagesController@nouveau')->middleware('App\Http\Middleware\Auth');
     Route::post('/{email}/suivis', 'SuivisController@nouveau');
+    Route::delete('/{email}/suivis', 'SuivisController@enlever');
 });
 
 // important de mettre les url contenant des variables à la fin. Les routes génériques prendront le pas dessus. A moins de completer l'url avec /utilisateurs/{email}

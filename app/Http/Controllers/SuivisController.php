@@ -20,4 +20,18 @@ class SuivisController extends Controller
 
         return back();
     }
+
+    public function enlever()
+    {
+        $utilisateurQuiSuit = auth()->user();
+        $utilisateurQuiEstSuivi = Utilisateur::where('email', request('email'))->firstOrFail();
+
+        //attach() permet de relier les 2 utilisateurs, via la table suivis()
+        $utilisateurQuiSuit->suivis()->detach($utilisateurQuiEstSuivi);
+
+        flash("Vous ne suivez plus {$utilisateurQuiEstSuivi->email}.")->success();
+
+        return back();
+    }
+
 }
