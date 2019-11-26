@@ -14,6 +14,17 @@ class Utilisateur extends Model implements Authenticatable {
     // aller verifier dans vendor\laravel\framework\src\Illuminate\Auth\Authenticatable.php si le getAuthPAssword() est le bon
     // si ce n'est pas le bon, la réécrire ici avec le nom de la colonne dans la BDD
 
+
+     // fillable pour éviter une erreur de type MassAssigment au sujet de l'email : autorise laravel à le rajouter en bdd en qq sorte
+     protected $fillable = ['email','mot_de_passe'];
+
+
+    public function messages()
+    {
+        //l'utilisateur a plusieurs messages
+        return $this->hasMany(Message::class)->latest();
+    }
+
     /**
      * Get the password for the user.
      *
@@ -27,7 +38,7 @@ class Utilisateur extends Model implements Authenticatable {
 
     // pour pouvoir gérer la déconnexion de l'utilisateur, sans pêter d'erreur lié au token
     // dira à laravel : je n'ai pas de colonne RememberToken
-    
+
      /**
      * Get the column name for the "remember me" token.
      *
@@ -39,10 +50,6 @@ class Utilisateur extends Model implements Authenticatable {
     }
 
 
-    // fillable pour éviter une erreur de type MassAssigment au sujet de l'email : autorise laravel à le rajouter en bdd en qq sorte
-    protected $fillable = [
-        'email',
-        'mot_de_passe'
-    ];
+
 
 }

@@ -27,10 +27,16 @@
                     <button class="button is-link" type="submit">Publier</button>
                 </div>
             </div>
-
-
         </form>
 
     @endif
+
+    @foreach ($utilisateur->messages as $message)
+        <hr>
+        <p>
+            <strong>{{ $message->created_at }}
+            {{ $message->contenu }}
+        </p>
+    @endforeach
 
     <a href="/" class="button">Retour à l'accueil</a>
