@@ -17,14 +17,14 @@ class CompteController extends Controller
         //var_dump(auth()->guest());
 
         //si l'utilisateur est un invité, on le renvoie vers la page de connexion, avec message d'erreur
-        if(auth()->guest()) {
+        //if(auth()->guest()) {
             //pour lui permettre de s'afficher, ne pas oublier de mettre dans layout.blade.php le "@include('flash::message')" avant le @yield('contenu')
             // pour l'afficher avec une mise en page correcte, copier dans le terminal : php artisan vendor:publish --provider="Laracasts\Flash\FlashServiceProvider"
             // puis aller vérifier dans ressources\views\vendor\flash\message.blade.php
-            flash("Vous devez être connecté pour voir cette page")->error();
+            //flash("Vous devez être connecté pour voir cette page")->error();
 
-            return redirect('/connexion');
-        }
+            //return redirect('/connexion');
+
 
         return view('mon-compte');
     }
@@ -41,4 +41,35 @@ class CompteController extends Controller
         return redirect('/');
 
     }
+
+
+    public function modificationMotDePasse()
+    {
+
+        //vérifier que le mot de passe est correct : repasser les regles de validation
+
+        request()->validate([
+            'password' => ['required', 'confirmed', 'min:8'],
+            'password_confirmation' => ['required'],
+        ]);
+
+        // récupérer l'utilisateur connecté
+        //dump(auth()->user());
+
+        //3 lignes en détail pour sauvegarder les modifications
+        // $utilisateur = auth()->user();
+        // $utilisateur->mot_de_passe = bcrypt(request('password'));
+        // $utilisateur->save();
+
+        // ou plus rapide : seul les champs spécifiés dans le tableau sont modifiées
+        auth()->user()->update([
+            'mot_de_passe' => bcrypt(request('password')),
+        ]);
+
+        flash("Votre mot de passe a bien été mis à jour")->success();
+
+        return redirect('/mon-compte');
+    }
+
+
 }

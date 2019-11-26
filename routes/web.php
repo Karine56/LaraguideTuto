@@ -13,11 +13,7 @@
 
 use App\Http\Controllers\ConnexionController;
 
-Route::view('/', 'welcome');
-// est l'équivalent de :
-    // Route::get('/', function () {
-    //     return view('welcome');
-    // });
+
 
 // utilisation du formulaire
 Route::get('/inscription', 'InscriptionController@formulaire');
@@ -31,11 +27,26 @@ Route::post('/connexion', 'ConnexionController@traitement');
 
 // affichage des utilisateurs présent dans la bdd
 //url suivi du Nom du Controller et du nom de la methode utilisée
-Route::get('/utilisateurs', 'UtilisateursController@liste');
+Route::get('/', 'UtilisateursController@liste');
 
 
-Route::get('/mon-compte', 'CompteController@accueil');
-Route::get('/deconnexion', 'CompteController@deconnexion');
+// GROUPE DE ROUTES
+// 1er paramètre contient des options du groupe
+//2eme paramètre : fonction anonyme contenant les routes du groupe
+Route::group([
+    'middleware' => 'App\Http\Middleware\Auth',
+], function () {
+
+Route::get('/mon-compte', 'CompteController@accueil')->middleware('App\Http\Middleware\Auth');
+Route::get('/deconnexion', 'CompteController@deconnexion')->middleware('App\Http\Middleware\Auth');
+Route::post('/modification-mot-de-passe', 'CompteController@modificationMotDePasse')->middleware('App\Http\Middleware\Auth');
+Route::post('/messages', 'MessagesController@nouveau')->middleware('App\Http\Middleware\Auth');
+});
+
+// important de mettre les url contenant des variables à la fin. Les routes génériques prendront le pas dessus. A moins de completer l'url avec /utilisateurs/{email}
+Route::get('/{email}', 'UtilisateursController@voir');
+
+
 
 
 
