@@ -17,20 +17,20 @@
                 <div class="navbar-start">
 
                     @include('partials.navbar-item', ['lien' => '/', 'texte' => 'Accueil'])
-                    @if(auth()->check())
+                    @auth <!-- remplace le @if(auth()->check()) -->
                         @include('partials.navbar-item', ['lien' => auth()->user()->email, 'texte' => auth()->user()->email])
-                    @endif
+                    @endauth <!-- remplace le @endif -->
                 </div>
 
                 <div class="navbar-end">
                 <!-- modification de la navbar selon le statut connecté ou non -->
-                    @if(auth()->check())
+                    @auth
                         @include('partials.navbar-item', ['lien' => '/mon-compte', 'texte' => 'Mon compte'])
                         @include('partials.navbar-item', ['lien' => '/deconnexion', 'texte' => 'Déconnexion'])
                     @else
                         @include('partials.navbar-item', ['lien' => '/connexion', 'texte' => 'Connexion'])
                         @include('partials.navbar-item', ['lien' => '/inscription', 'texte' => 'inscription'])
-                    @endif
+                    @endauth
                 </div>
             </div>
         </nav>
