@@ -1,4 +1,7 @@
 @foreach (session('flash_notification', collect())->toArray() as $message)
+
+    <section class="section">
+
     @if ($message['overlay'])
         @include('flash::modal', [
             'modalClass' => 'flash-modal',
@@ -26,6 +29,9 @@
 
         </div>
     @endif
+
+    </section>
+
 @endforeach
 
 {{ session()->forget('flash_notification') }}

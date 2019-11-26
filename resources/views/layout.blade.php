@@ -15,19 +15,21 @@
         <nav class="navbar is-light">
             <div class="navbar-menu">
                 <div class="navbar-start">
-                    <a href="/" class="navbar-item {{ request()->is('/') ? 'is-active' : '' }}">Accueil</a>
+
+                    @include('partials.navbar-item', ['lien' => '/', 'texte' => 'Accueil'])
+                    @if(auth()->check())
+                        @include('partials.navbar-item', ['lien' => auth()->user()->email, 'texte' => auth()->user()->email])
+                    @endif
                 </div>
+
                 <div class="navbar-end">
                 <!-- modification de la navbar selon le statut connecté ou non -->
                     @if(auth()->check())
-
-                        <a href="/mon-compte" class="navbar-item {{ request()->is('mon-compte') ? 'is-active' : '' }}">Mon compte</a>
-                        <a href="/deconnexion" class="navbar-item">Déconnexion</a>
+                        @include('partials.navbar-item', ['lien' => '/mon-compte', 'texte' => 'Mon compte'])
+                        @include('partials.navbar-item', ['lien' => '/deconnexion', 'texte' => 'Déconnexion'])
                     @else
-                    <!-- avec bulma, is-activ pour mettre l'onglet en surbrillance si c'est l'onglet actif -->
-                    <!-- condition ternaire :  true / false ? si vrai : si faux  -->
-                        <a href="/connexion" class="navbar-item {{ request()->is('connexion') ? 'is-active' : '' }}">Connexion</a>
-                        <a href="/inscription" class="navbar-item {{ request()->is('inscription') ? 'is-active' : '' }}">Inscription</a>
+                        @include('partials.navbar-item', ['lien' => '/connexion', 'texte' => 'Connexion'])
+                        @include('partials.navbar-item', ['lien' => '/inscription', 'texte' => 'inscription'])
                     @endif
                 </div>
             </div>
