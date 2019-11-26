@@ -21,13 +21,14 @@ class Utilisateur extends Model implements Authenticatable {
 
     public function messages()
     {
-        //l'utilisateur a plusieurs messages
+        //l'utilisateur a plusieurs messages : relation OneToMany
         return $this->hasMany(Message::class)->latest();
     }
 
 
     public function suivis()
     {
+        // relation ManyToMany
         //suivis, en 2eme parametre sera la table de pivot
         //peut renommer les colonnes attendues par laravel : suiveur_id et suivi_id
         // ecrase donc les valeurs par défaut pr la table de pivot
@@ -36,6 +37,8 @@ class Utilisateur extends Model implements Authenticatable {
 
     public function suit($utilisateur)
     {
+        //suivis() pour récupérer le querybuilder
+        //where (requete de type select)
         //retourne un booleen grâce à exists
         return $this->suivis()->where('suivi_id', $utilisateur->id)->exists();
     }
