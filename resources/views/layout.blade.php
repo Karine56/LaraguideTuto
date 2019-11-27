@@ -21,6 +21,7 @@
                         @include('partials.navbar-item', ['lien' => 'actualites', 'texte' => 'Actualités'])
                         @include('partials.navbar-item', ['lien' => auth()->user()->email, 'texte' => auth()->user()->email])
                     @endauth <!-- remplace le @endif -->
+                    @include('partials.navbar-item', ['lien' => '/calendrier', 'texte' => 'Calendrier'])
                 </div>
 
                 <div class="navbar-end">
