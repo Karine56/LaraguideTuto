@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Utilisateur;
+use Illuminate\Http\Request;
+use App\Mail\NouveauSuiveurMail;
+use Illuminate\Support\Facades\Mail;
 
 class SuivisController extends Controller
 {
@@ -15,6 +17,9 @@ class SuivisController extends Controller
 
         //attach() permet de relier les 2 utilisateurs, via la table suivis()
         $utilisateurQuiVaSuivre->suivis()->attach($utilisateurQuiVaEtreSuivi);
+
+        //envoyer un mail d'information à l'utilisateur suivi
+        Mail::to($utilisateurQuiVaEtreSuivi)->send(new NouveauSuiveurMail);
 
         flash("Vous suivez maintenant {$utilisateurQuiVaEtreSuivi->email}.")->success();
 
