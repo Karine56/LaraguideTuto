@@ -18,6 +18,7 @@
 
                     @include('partials.navbar-item', ['lien' => '/', 'texte' => 'Accueil'])
                     @auth <!-- remplace le @if(auth()->check()) -->
+                        @include('partials.navbar-item', ['lien' => 'actualites', 'texte' => 'Actualités'])
                         @include('partials.navbar-item', ['lien' => auth()->user()->email, 'texte' => auth()->user()->email])
                     @endauth <!-- remplace le @endif -->
                 </div>
