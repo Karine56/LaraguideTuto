@@ -41,7 +41,10 @@ Route::group([
     Route::get('/actualites', 'ActualitesController@liste');
     Route::get('/deconnexion', 'CompteController@deconnexion')->middleware('App\Http\Middleware\Auth');
     Route::post('/modification-mot-de-passe', 'CompteController@modificationMotDePasse')->middleware('App\Http\Middleware\Auth');
+    Route::post('/modification-avatar', 'CompteController@modificationAvatar');
+
     Route::post('/messages', 'MessagesController@nouveau')->middleware('App\Http\Middleware\Auth');
+
     Route::post('/{email}/suivis', 'SuivisController@nouveau');
     Route::delete('/{email}/suivis', 'SuivisController@enlever');
 

@@ -72,4 +72,22 @@ class CompteController extends Controller
     }
 
 
+    public function modificationAvatar()
+    {
+        request()->validate([
+            'avatar' => ['required', 'image']
+        ]);
+
+        //pour traiter l'image, le recupérer et le stocker dans un dossier image
+        //ce fichier sera stocké par défaut dans le dossier de stockage par défaut : storage\app\nom_du_dossier défini en store('')
+        $path = request('avatar')->store('avatars', 'public');
+        //mise à jour de l'utilisateur
+        auth()->user()->update([
+            'avatar' => $path,
+        ]);
+
+        flash("Votre avatar a bien été mis à jour")->success();
+        return back();
+    }
+
 }

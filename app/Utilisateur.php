@@ -15,8 +15,8 @@ class Utilisateur extends Model implements Authenticatable {
     // si ce n'est pas le bon, la réécrire ici avec le nom de la colonne dans la BDD
 
 
-     // fillable pour éviter une erreur de type MassAssigment au sujet de l'email : autorise laravel à le rajouter en bdd en qq sorte
-     protected $fillable = ['email','mot_de_passe'];
+     // fillable pour éviter une erreur de type MassAssigment au sujet de l'email : autorise laravel à le remplir en bdd en qq sorte
+     protected $fillable = ['email','mot_de_passe', 'avatar'];
 
 
     public function messages()

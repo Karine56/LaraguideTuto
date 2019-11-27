@@ -3,7 +3,16 @@
 
 @section('contenu')
     <div class="section">
-        <h1 class="title is-1">Mon compte</h1>
+        <div class="media">
+            <div class="media-left">
+                <figure class="image is-48x48">
+                    <img src="/storage/{{ auth()->user()->avatar }}" alt="Avatar">
+                </figure>
+            </div>
+        </div>
+         <div class="media-content">
+            <h1 class="title is-1">Mon compte</h1>
+        </div>
     </div>
 
 
@@ -34,6 +43,28 @@
             <div class="field">
                 <div class="control">
                     <button class="button is-link" type="submit">Modifier mon mot de passe</button>
+                </div>
+            </div>
+
+    </form>
+
+    <form class="section" action="/modification-avatar" method="post" enctype="multipart/form-data">
+    {{csrf_field()}}
+
+    <div class="field">
+                <label class="label">Nouvel avatar</label>
+                <div class="control">
+                    <input class="input" type="file" name="avatar">
+                </div>
+                 @if($errors->has('avatar'))
+                    <p class="help is-danger">{{ $errors->first('avatar') }}</p>
+                @endif
+            </div>
+
+
+            <div class="field">
+                <div class="control">
+                    <button class="button is-link" type="submit">Modifier mon avatar</button>
                 </div>
             </div>
 

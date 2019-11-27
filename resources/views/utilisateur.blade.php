@@ -6,7 +6,18 @@
         <h1 class='title is-1'>
             <div class="level-left">
                 <div class="level-item">
-                {{ $utilisateur->email }}
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-48x48">
+                                <img src="/storage/{{ $utilisateur->avatar }}" alt="Avatar">
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            {{ $utilisateur->email }}
+                        </div>
+                    </div>
+
+
                 </div>
 
                 @auth
