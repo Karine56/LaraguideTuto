@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Calendar;
 
 class CalendarController extends Controller
 {
@@ -12,8 +13,9 @@ class CalendarController extends Controller
         return view('calendrier');
     }
 
-    public function nouveau()
+    public function nouveau(Request $request)
     {
+        //dd($request);
 
         //valider les données
         request()->validate([
@@ -25,13 +27,13 @@ class CalendarController extends Controller
             'heure_fin_evenement'=>['required'],
         ]);
 
-        auth()->user()->calendar->create([
+        $evenement = Calendar::create([
             'contenu' => request('contenu_evenement'),
             'titre' => request('titre_evenement'),
-            'date_debut_evenement' => request('date_debut_evenement'),
-            'heure_debut_evenement' => request('heure_debut_evenement'),
-            'date_fin_evenement' => request('date_fin_evenement'),
-            'heure_fin_evenement' => request('heure_fin_evenement'),
+            'date_debut' => request('date_debut_evenement'),
+            'heure_debut' => request('heure_debut_evenement'),
+            'date_fin' => request('date_fin_evenement'),
+            'heure_fin' => request('heure_fin_evenement'),
         ]);
 
 
