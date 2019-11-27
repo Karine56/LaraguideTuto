@@ -9,9 +9,12 @@ class ActualitesController extends Controller
     //
     public function liste()
     {
+
         $messages = auth()->user()
         //suivis est ici un attribut
             ->suivis
+            //load() permet, en une seule requete SQl de chrger tous les messages
+            ->load('messages')
             //map() est une fonction pour obtenir la liste des messages echangés - fait appel à une fonction anonyme "de transformation" (on transforme l'utilisateur 1 en liste de message, l'utilisateur 2 en liste de messages)
             // ->map(function ($utilisateur) {
             //     return $utilisateur->messages;
@@ -27,8 +30,9 @@ class ActualitesController extends Controller
             //idem que map, possible de simplifier :
             ->sortByDesc->created_at;
 
-            
+
             //a noter qu'une fonction flatMap existe aussi, en version plus rapide encore
+            //le flatmap peut etre assimilé à un foreach
             //->flatMap->messages au lieu de ->map->messages et ->flatten
 
 
